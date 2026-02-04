@@ -1,0 +1,38 @@
+{
+  "name": "traversy_crud",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/julianCarrico/traversy_CRUD#readme",
+  "bugs": {
+    "url": "https://github.com/julianCarrico/traversy_CRUD/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianCarrico/traversy_CRUD.git"
+  },
+  "license": "MIT",
+  "author": "Julian",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app.js",
+    "dev": "cross-env NODE_ENV=development nodemon app.js"
+  },
+  "dependencies": {
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.5",
+    "express-session": "^1.19.0",
+    "method-override": "^3.0.0",
+    "moment": "^2.30.1",
+    "mongoose": "^9.1.5",
+    "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "nodemon": "^3.1.11"
+  }
+}
