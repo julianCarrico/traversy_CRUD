@@ -1,11 +1,13 @@
 const path = require('path')
 const express = require('express')
 const app = express()
+// const mongoose = require('mongoose') not needed 
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const exphbs = require('express-handlebars')
 const passport = require('passport')
 const session = require('express-session')
+const MongoStore = require('connect-mongo').default//needs .default now
 const connectDB = require('./config/db')
 
 //load confg
@@ -36,9 +38,12 @@ app.use(
         secret: 'keyboard cat',
         resave: false,
         saveUninitialized: false,
+        //Change: MongoStore syntax has changed
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URI
+        })
     })
 )
-
 //Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
