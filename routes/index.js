@@ -20,7 +20,7 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
         console.log(stories)
         res.render('dashboard', {
             name: req.user.firstName,
-            stories
+            stories,
         })
     } catch (err) {
         console.error(err)

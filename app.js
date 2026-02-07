@@ -18,14 +18,28 @@ require('./config/passport')(passport)
 
 connectDB()
 
+//Body parser
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
 //Determine level of logging
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
+//Hanglebars Helpers
+const { formatDate, stripTags, truncate, editIcon, select } = require('./helpers/hbs')
+
 //Handlebars
 //added .engine after exphbs
 app.engine('.hbs', exphbs.engine({
+    helpers: {
+        formatDate,
+        stripTags,
+        truncate,
+        editIcon,
+        select
+    },
     defaultLayout: 'main',
     extname: '.hbs'
 })
@@ -48,12 +62,19 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+//SET GLOBAL VARIABLE
+app.use(function (req, res, next) {
+    res.locals.user = req.user || null
+    next()
+})
+
 //Static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
 //Routes
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
+app.use('/stories', require('./routes/stories'))
 
 const PORT = process.env.PORT || 8000
 

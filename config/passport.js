@@ -14,11 +14,11 @@ module.exports = function (passport) {
                 displayName: profile.displayName,
                 firstName: profile.name.givenName,
                 lastName: profile.name.familyName,
-                image: profile.photos[0].vaule
+                image: profile.photos[0].value
             }
+
             try {
                 let user = await User.findOne({ googleId: profile.id })
-
                 if (user) {
                     done(null, user)
                 } else {
@@ -30,9 +30,10 @@ module.exports = function (passport) {
             }
         }
     ))
+
     passport.serializeUser((user, done) => {
         done(null, user.id)
-    })
+    });
 
     //change this to async await to avoid mongoose no longer accecpts callbacks error
     passport.deserializeUser(async (id, done) => {
